@@ -26,62 +26,80 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        body: Row(
-          children: [
-            SymDesktopNav(
-              textStyle: const TextStyle(color: Color(0xFFFFFFFF)),
-              initialIndex: 0,
-              items: const [
-                SymDesktopNavItem(
-                    itemName: 'Home',
-                    itemImage: Icon(
-                      Icons.access_alarm,
-                      size: 20,
-                      color: Color(0xFFFFFFFF),
-                    )),
-                SymDesktopNavItem(
-                  itemName: 'Mingle',
+      home: const Home(),
+    );
+  }
+}
+
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  int _index = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Row(
+        children: [
+          SymDesktopNav(
+            textStyle: const TextStyle(color: Color(0xFFFFFFFF)),
+            initialIndex: _index,
+            items: const [
+              SymDesktopNavItem(
+                  itemName: 'Home',
                   itemImage: Icon(
-                    Icons.add_a_photo,
+                    Icons.access_alarm,
                     size: 20,
                     color: Color(0xFFFFFFFF),
-                  ),
+                  )),
+              SymDesktopNavItem(
+                itemName: 'Mingle',
+                itemImage: Icon(
+                  Icons.add_a_photo,
+                  size: 20,
+                  color: Color(0xFFFFFFFF),
                 ),
-                SymDesktopNavItem(
-                  itemName: 'Discuss',
-                ),
-                SymDesktopNavItem(
-                  itemName: 'Notifikasi',
-                  itemImage: Icon(
-                    Icons.notifications,
-                    size: 20,
-                    color: Color(0xFFFFFFFF),
-                  ),
-                  classify: Classify.bottom,
-                ),
-                SymDesktopNavItem(
-                  itemName: 'Settings',
-                  itemImage: Icon(
-                    Icons.settings,
-                    size: 20,
-                    color: Color(0xFFFFFFFF),
-                  ),
-                  classify: Classify.bottom,
-                ),
-              ],
-              onItemSelected: (index) {
-                print('object $index');
-              },
-            ),
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.only(left: 16),
-                child: Text('Section area'),
               ),
-            )
-          ],
-        ),
+              SymDesktopNavItem(
+                itemName: 'Discuss',
+              ),
+              SymDesktopNavItem(
+                itemName: 'Notifikasi',
+                itemImage: Icon(
+                  Icons.notifications,
+                  size: 20,
+                  color: Color(0xFFFFFFFF),
+                ),
+                classify: Classify.bottom,
+              ),
+              SymDesktopNavItem(
+                itemName: 'Settings',
+                itemImage: Icon(
+                  Icons.settings,
+                  size: 20,
+                  color: Color(0xFFFFFFFF),
+                ),
+                classify: Classify.bottom,
+              ),
+            ],
+            onItemSelected: (index) {
+              setState(() {
+                _index = index;
+              });
+            },
+          ),
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.only(left: 16),
+              child: Text('Section area index: $_index'),
+            ),
+          )
+        ],
       ),
     );
   }

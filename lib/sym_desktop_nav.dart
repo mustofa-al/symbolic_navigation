@@ -6,7 +6,7 @@ import 'package:sym_desktop_nav/sym_desktop_nav/sym_desktop_nav_item.dart';
 class SymDesktopNav extends StatefulWidget {
   final List<SymDesktopNavItem> items;
   final int initialIndex;
-  final Function(int) onItemSelected;
+  final ValueChanged<int> onItemSelected;
   final Color? backgroundColor;
   final Color? itemBackgroundColor;
   final TextStyle? textStyle;
@@ -22,15 +22,10 @@ class SymDesktopNav extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SymDesktopNavState createState() => _SymDesktopNavState(items[initialIndex]);
+  _SymDesktopNavState createState() => _SymDesktopNavState();
 }
 
 class _SymDesktopNavState extends State<SymDesktopNav> {
-  late SymDesktopNavItem _selectedItem;
-  _SymDesktopNavState(SymDesktopNavItem initialItem) {
-    _selectedItem = initialItem;
-  }
-
   @override
   Widget build(BuildContext context) {
     List<List<SymDesktopNavItem>> categorizedItems = [];
@@ -38,7 +33,7 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
         widget.items.where((element) => element.classify == Classify.top)));
     categorizedItems.add(List.of(
         widget.items.where((element) => element.classify == Classify.bottom)));
-    widget.onItemSelected.call(widget.items.indexOf(_selectedItem));
+
     return Material(
       color: widget.backgroundColor ?? const Color(0xFF5e4229),
       textStyle: widget.textStyle,
@@ -51,7 +46,8 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
                 Column(
                   children: value
                       .asMap()
-                      .map((key1, value1) => MapEntry(key1, _item(key, value1)))
+                      .map(
+                          (key1, value1) => MapEntry(key1, _item(key1, value1)))
                       .values
                       .toList(),
                 )))
@@ -71,18 +67,14 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
       ),
       child: InkWell(
         onTap: () {
-          if (value != _selectedItem) {
-            setState(() {
-              _selectedItem = value;
-            });
-          }
+          widget.onItemSelected.call(widget.items.indexOf(value));
         },
         borderRadius: BorderRadius.circular(8),
         hoverColor: widget.itemBackgroundColor?.withOpacity(0.5) ??
             const Color(0xFFFFFFFF).withOpacity(0.1),
         child: Ink(
           padding: const EdgeInsets.all(6),
-          decoration: value == _selectedItem
+          decoration: value == widget.items[widget.initialIndex]
               ? BoxDecoration(
                   color: const Color(0xFFB26941).withOpacity(0.5),
                   borderRadius: BorderRadius.circular(8),
