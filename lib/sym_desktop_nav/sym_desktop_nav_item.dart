@@ -6,12 +6,14 @@ class SymDesktopNavItem extends StatelessWidget {
   final String itemName;
   final Widget? itemImage;
   final Classify classify;
-  const SymDesktopNavItem(
-      {Key? key,
-      required this.itemName,
-      this.itemImage,
-      this.classify = Classify.top})
-      : super(key: key);
+  final bool withSeparator;
+  const SymDesktopNavItem({
+    Key? key,
+    required this.itemName,
+    this.itemImage,
+    this.classify = Classify.top,
+    this.withSeparator = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

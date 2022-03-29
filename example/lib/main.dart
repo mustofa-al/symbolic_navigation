@@ -47,7 +47,9 @@ class _HomeState extends State<Home> {
       body: Row(
         children: [
           SymDesktopNav(
-            textStyle: const TextStyle(color: Color(0xFFFFFFFF)),
+            textStyle: const TextStyle(
+              color: Color(0xFF9E9E9E),
+            ),
             initialIndex: _index,
             items: [
               SymDesktopNavItem(
@@ -56,12 +58,12 @@ class _HomeState extends State<Home> {
                     ? const Icon(
                         Icons.alarm_add,
                         size: 20,
-                        color: Color(0xFFFFFFFF),
+                        color: Color(0xFF9E9E9E),
                       )
                     : const Icon(
                         Icons.access_alarm,
                         size: 20,
-                        color: Color(0xFFFFFFFF),
+                        color: Color(0xFF9E9E9E),
                       ),
               ),
               SymDesktopNavItem(
@@ -70,13 +72,14 @@ class _HomeState extends State<Home> {
                     ? const Icon(
                         Icons.add_a_photo,
                         size: 20,
-                        color: Color(0xFFFFFFFF),
+                        color: Color(0xFF9E9E9E),
                       )
                     : const Icon(
                         Icons.photo,
                         size: 20,
-                        color: Color(0xFFFFFFFF),
+                        color: Color(0xFF9E9E9E),
                       ),
+                withSeparator: true,
               ),
               const SymDesktopNavItem(
                 itemName: 'Discuss',
@@ -87,12 +90,12 @@ class _HomeState extends State<Home> {
                     ? const Icon(
                         Icons.notification_add,
                         size: 20,
-                        color: Color(0xFFFFFFFF),
+                        color: Color(0xFF9E9E9E),
                       )
                     : const Icon(
                         Icons.notifications,
                         size: 20,
-                        color: Color(0xFFFFFFFF),
+                        color: Color(0xFF9E9E9E),
                       ),
                 classify: Classify.bottom,
               ),
@@ -102,12 +105,12 @@ class _HomeState extends State<Home> {
                     ? const Icon(
                         Icons.settings_accessibility,
                         size: 20,
-                        color: Color(0xFFFFFFFF),
+                        color: Color(0xFF9E9E9E),
                       )
                     : const Icon(
                         Icons.settings,
                         size: 20,
-                        color: Color(0xFFFFFFFF),
+                        color: Color(0xFF9E9E9E),
                       ),
                 classify: Classify.bottom,
               ),
