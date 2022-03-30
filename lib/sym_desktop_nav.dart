@@ -167,8 +167,12 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
     }
 
     for (var i = 0; i < separatorIndexes.length; i++) {
-      if (widget.selectedIndex - separatorIndexes[i] == 1) {
+      if (widget.selectedIndex - separatorIndexes[i] >= 1) {
         extra = 8.0 * separatorIndexes[i];
+      } else {
+        if (widget.selectedIndex != 0) {
+          extra = 8.0;
+        }
       }
     }
 

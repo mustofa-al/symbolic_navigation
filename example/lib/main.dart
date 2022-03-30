@@ -55,6 +55,7 @@ class _HomeState extends State<Home> {
             items: [
               SymDesktopNavItem(
                 itemName: 'Home',
+                withSeparator: true,
                 itemImage: _index == 0
                     ? const Icon(
                         Icons.alarm_add,
@@ -80,7 +81,6 @@ class _HomeState extends State<Home> {
                         size: 25,
                         color: Color(0xFF9E9E9E),
                       ),
-                withSeparator: true,
               ),
               const SymDesktopNavItem(
                 itemName: 'Discuss',
