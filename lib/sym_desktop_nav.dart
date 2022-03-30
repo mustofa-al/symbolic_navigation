@@ -6,7 +6,7 @@ import 'package:sym_desktop_nav/sym_desktop_nav/sym_desktop_nav_selection.dart';
 
 class SymDesktopNav extends StatefulWidget {
   final List<SymDesktopNavItem> items;
-  final int initialIndex;
+  final int selectedIndex;
   final ValueChanged<int> onItemSelected;
   final Color? backgroundColor;
   final Color? itemBackgroundColor;
@@ -18,7 +18,7 @@ class SymDesktopNav extends StatefulWidget {
   const SymDesktopNav(
       {Key? key,
       required this.items,
-      required this.initialIndex,
+      required this.selectedIndex,
       required this.onItemSelected,
       this.backgroundColor,
       this.textStyle,
@@ -144,10 +144,13 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
   }
 
   double _getYOffset() {
-    double offsetY = (16.0 + 44.0) * widget.initialIndex;
-    if (widget.items[widget.initialIndex].classify == Classify.bottom) {
+    double offsetY = (16.0 + 44) * widget.selectedIndex;
+    if (widget.items[widget.selectedIndex].classify == Classify.bottom) {
       offsetY = ((MediaQuery.of(context).size.height - 16.0) -
-          (44.0 + 16.0) * (widget.items.length - widget.initialIndex));
+          (44 + 16.0) * (widget.items.length - widget.selectedIndex));
+    }
+    if (widget.items[widget.selectedIndex].withSeparator) {
+      offsetY += 1.5;
     }
     return offsetY;
   }

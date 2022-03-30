@@ -50,19 +50,19 @@ class _HomeState extends State<Home> {
             textStyle: const TextStyle(
               color: Color(0xFF9E9E9E),
             ),
-            initialIndex: _index,
+            selectedIndex: _index,
             items: [
               SymDesktopNavItem(
                 itemName: 'Home',
                 itemImage: _index == 0
                     ? const Icon(
                         Icons.alarm_add,
-                        size: 20,
+                        size: 25,
                         color: Color(0xFF9E9E9E),
                       )
                     : const Icon(
                         Icons.access_alarm,
-                        size: 20,
+                        size: 25,
                         color: Color(0xFF9E9E9E),
                       ),
               ),
@@ -71,12 +71,12 @@ class _HomeState extends State<Home> {
                 itemImage: _index == 1
                     ? const Icon(
                         Icons.add_a_photo,
-                        size: 20,
+                        size: 25,
                         color: Color(0xFF9E9E9E),
                       )
                     : const Icon(
                         Icons.photo,
-                        size: 20,
+                        size: 25,
                         color: Color(0xFF9E9E9E),
                       ),
                 withSeparator: true,
@@ -91,12 +91,12 @@ class _HomeState extends State<Home> {
                 itemImage: _index == 3
                     ? const Icon(
                         Icons.notification_add,
-                        size: 20,
+                        size: 25,
                         color: Color(0xFF9E9E9E),
                       )
                     : const Icon(
                         Icons.notifications,
-                        size: 20,
+                        size: 25,
                         color: Color(0xFF9E9E9E),
                       ),
                 classify: Classify.bottom,
@@ -106,12 +106,12 @@ class _HomeState extends State<Home> {
                 itemImage: _index == 4
                     ? const Icon(
                         Icons.settings_accessibility,
-                        size: 20,
+                        size: 25,
                         color: Color(0xFF9E9E9E),
                       )
                     : const Icon(
                         Icons.settings,
-                        size: 20,
+                        size: 25,
                         color: Color(0xFF9E9E9E),
                       ),
                 classify: Classify.bottom,
