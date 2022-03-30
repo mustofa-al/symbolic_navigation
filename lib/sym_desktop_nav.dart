@@ -9,7 +9,7 @@ class SymDesktopNav extends StatefulWidget {
   final int selectedIndex;
   final ValueChanged<int> onItemSelected;
   final Color? backgroundColor;
-  final Color? itemBackgroundColor;
+  final Color? itemSelectedBackgroundColor;
   final Color? lineColor;
   final TextStyle? textStyle;
   final Curve curve;
@@ -22,7 +22,7 @@ class SymDesktopNav extends StatefulWidget {
       required this.onItemSelected,
       this.backgroundColor,
       this.textStyle,
-      this.itemBackgroundColor,
+      this.itemSelectedBackgroundColor,
       this.lineColor,
       this.curve = Curves.fastLinearToSlowEaseIn,
       this.duration = const Duration(milliseconds: 500)})
@@ -65,7 +65,8 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
                 height: 44,
                 width: 44,
                 offsetY: _getYOffset(),
-                color: const Color(0xFF212121),
+                color: widget.itemSelectedBackgroundColor ??
+                    const Color(0xFF212121),
                 duration: widget.duration,
                 curve: widget.curve,
               ),
@@ -107,8 +108,7 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
 
   Widget _item(int groupIndex, int valueIndex, int groupValuesLength,
       SymDesktopNavItem value) {
-    return Stack(
-      alignment: Alignment.bottomCenter,
+    return Column(
       children: [
         Padding(
           padding: EdgeInsets.only(
@@ -125,7 +125,7 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
               widget.onItemSelected.call(widget.items.indexOf(value));
             },
             borderRadius: BorderRadius.circular(8),
-            hoverColor: widget.itemBackgroundColor?.withOpacity(0.5) ??
+            hoverColor: widget.itemSelectedBackgroundColor?.withOpacity(0.5) ??
                 const Color(0xFF000000).withOpacity(0.1),
             child: Ink(
               padding: const EdgeInsets.all(6),
@@ -134,21 +134,45 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
           ),
         ),
         value.withSeparator && value.classify == Classify.top
-            ? Align(
-                alignment: Alignment.bottomCenter,
-                child: Ink(
-                  width: 25,
-                  color: widget.lineColor ?? const Color(0xFFE0E0E0),
-                  height: 1.5,
-                ),
-              )
+            ? _separator()
             : Ink()
       ],
     );
   }
 
+  Widget _separator() {
+    return Ink(
+      height: 8,
+      child: Center(
+        child: Ink(
+          width: 25,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4),
+            color: widget.lineColor ?? const Color(0xFFE0E0E0),
+          ),
+          height: 1.5,
+        ),
+      ),
+    );
+  }
+
   double _getYOffset() {
-    double offsetY = (16.0 + 44) * widget.selectedIndex;
+    double extra = 0;
+    List<int> separatorIndexes = [];
+    for (var i = 0; i < widget.items.length; i++) {
+      if (widget.items[i].withSeparator &&
+          widget.items[i].classify == Classify.top) {
+        separatorIndexes.add(i);
+      }
+    }
+
+    for (var i = 0; i < separatorIndexes.length; i++) {
+      if (widget.selectedIndex - separatorIndexes[i] == 1) {
+        extra = 8.0 * separatorIndexes[i];
+      }
+    }
+
+    double offsetY = (16.0 + 44) * widget.selectedIndex + extra;
     if (widget.items[widget.selectedIndex].classify == Classify.bottom) {
       offsetY = ((MediaQuery.of(context).size.height - 16.0) -
           (44 + 16.0) * (widget.items.length - widget.selectedIndex));

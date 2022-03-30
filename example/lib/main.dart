@@ -51,6 +51,7 @@ class _HomeState extends State<Home> {
               color: Color(0xFF9E9E9E),
             ),
             selectedIndex: _index,
+            itemSelectedBackgroundColor: const Color(0xFF000000),
             items: [
               SymDesktopNavItem(
                 itemName: 'Home',
@@ -91,7 +92,23 @@ class _HomeState extends State<Home> {
               SymDesktopNavItem(
                 itemName: 'Notifikasi',
                 withSeparator: true,
-                itemImage: _index == 3
+                itemImage: _index == 4
+                    ? const Icon(
+                        Icons.notification_add,
+                        size: 25,
+                        color: Color(0xFF9E9E9E),
+                      )
+                    : const Icon(
+                        Icons.notifications,
+                        size: 25,
+                        color: Color(0xFF9E9E9E),
+                      ),
+                classify: Classify.bottom,
+              ),
+              SymDesktopNavItem(
+                itemName: 'Notifikasi',
+                withSeparator: true,
+                itemImage: _index == 5
                     ? const Icon(
                         Icons.notification_add,
                         size: 25,
@@ -106,7 +123,7 @@ class _HomeState extends State<Home> {
               ),
               SymDesktopNavItem(
                 itemName: 'Settings',
-                itemImage: _index == 4
+                itemImage: _index == 6
                     ? const Icon(
                         Icons.settings_accessibility,
                         size: 25,
