@@ -85,6 +85,9 @@ class _HomeState extends State<Home> {
                 itemName: 'Discuss',
                 withSeparator: true,
               ),
+              const SymDesktopNavItem(
+                itemName: 'Test',
+              ),
               SymDesktopNavItem(
                 itemName: 'Notifikasi',
                 withSeparator: true,

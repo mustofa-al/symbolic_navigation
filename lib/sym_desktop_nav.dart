@@ -107,7 +107,8 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
 
   Widget _item(int groupIndex, int valueIndex, int groupValuesLength,
       SymDesktopNavItem value) {
-    return Column(
+    return Stack(
+      alignment: Alignment.bottomCenter,
       children: [
         Padding(
           padding: EdgeInsets.only(
@@ -132,11 +133,14 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
             ),
           ),
         ),
-        value.withSeparator
-            ? Ink(
-                width: 25,
-                color: widget.lineColor ?? const Color(0xFFE0E0E0),
-                height: 1.5,
+        value.withSeparator && value.classify == Classify.top
+            ? Align(
+                alignment: Alignment.bottomCenter,
+                child: Ink(
+                  width: 25,
+                  color: widget.lineColor ?? const Color(0xFFE0E0E0),
+                  height: 1.5,
+                ),
               )
             : Ink()
       ],
@@ -148,9 +152,6 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
     if (widget.items[widget.selectedIndex].classify == Classify.bottom) {
       offsetY = ((MediaQuery.of(context).size.height - 16.0) -
           (44 + 16.0) * (widget.items.length - widget.selectedIndex));
-    }
-    if (widget.items[widget.selectedIndex].withSeparator) {
-      offsetY += 1.5;
     }
     return offsetY;
   }
