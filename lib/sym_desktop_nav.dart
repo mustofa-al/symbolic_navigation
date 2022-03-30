@@ -50,7 +50,7 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
             right: BorderSide(
               color: widget.lineColor ?? const Color(0xFFE0E0E0),
               style: BorderStyle.solid,
-              width: 0.5,
+              width: 1,
             ),
           ),
         ),

@@ -83,9 +83,11 @@ class _HomeState extends State<Home> {
               ),
               const SymDesktopNavItem(
                 itemName: 'Discuss',
+                withSeparator: true,
               ),
               SymDesktopNavItem(
                 itemName: 'Notifikasi',
+                withSeparator: true,
                 itemImage: _index == 3
                     ? const Icon(
                         Icons.notification_add,
