@@ -29,7 +29,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  sym_desktop_nav:
+  sym_nav:
     path: ../
 
 

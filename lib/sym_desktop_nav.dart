@@ -1,8 +1,8 @@
 library sym_desktop_nav;
 
 import 'package:flutter/material.dart';
-import 'package:sym_desktop_nav/sym_desktop_nav/sym_desktop_nav_item.dart';
-import 'package:sym_desktop_nav/sym_desktop_nav/sym_desktop_nav_selection.dart';
+import 'package:sym_nav/sym_desktop_nav/sym_desktop_nav_item.dart';
+import 'package:sym_nav/sym_desktop_nav/sym_desktop_nav_selection.dart';
 
 class SymDesktopNav extends StatefulWidget {
   final List<SymDesktopNavItem> items;
