@@ -1,4 +1,5 @@
 import 'package:example/desktop.dart';
+import 'package:example/mobile.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -51,7 +52,17 @@ class _HomeState extends State<Home> {
                     MaterialPageRoute(builder: (context) => const Desktop()));
               },
               child: const Text('Desktop'),
-            )
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => Mobile()));
+              },
+              child: const Text('Mobile'),
+            ),
           ],
         ),
       ),
