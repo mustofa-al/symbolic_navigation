@@ -11,29 +11,31 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Navigation View for Symbolic.id project.
+
+This version is beta.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- Classification of top and bottom section
+- Separatable navigation items
+- Animated selection
+- Etc
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Get package by:
+```yaml
+sym_desktop_nav:
+    git:
+      url: https://github.com/mustofa-al/symbolic_navigation.git
+      ref: [latest_commit]
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
-```dart
-const like = 'sample';
-```
+Find it out in `main.dart`
 
 ## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+NOTE: Pleas don't place item to wrong position. Top item should go top, Bottom item should go bottom
