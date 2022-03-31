@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sym_nav/sym_desktop_nav.dart';
-import 'package:sym_nav/sym_desktop_nav/sym_desktop_nav_item.dart';
 
 void main() {
   runApp(const MyApp());
