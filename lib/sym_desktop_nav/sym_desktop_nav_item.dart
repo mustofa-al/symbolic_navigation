@@ -2,17 +2,13 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-class SymDesktopNavItem extends StatelessWidget {
+abstract class SymDesktopNavItem extends StatelessWidget {
   final String itemName;
   final Widget? itemImage;
-  final Classify classify;
-  final bool withSeparator;
   const SymDesktopNavItem({
     Key? key,
     required this.itemName,
     this.itemImage,
-    this.classify = Classify.top,
-    this.withSeparator = false,
   }) : super(key: key);
 
   @override
@@ -50,4 +46,20 @@ class SymDesktopNavItem extends StatelessWidget {
   }
 }
 
-enum Classify { top, bottom }
+class SymDesktopNavTopItem extends SymDesktopNavItem {
+  final bool withSeparator;
+  const SymDesktopNavTopItem({
+    Key? key,
+    required String itemName,
+    Widget? itemImage,
+    this.withSeparator = false,
+  }) : super(key: key, itemName: itemName, itemImage: itemImage);
+}
+
+class SymDesktopNavBottomItem extends SymDesktopNavItem {
+  const SymDesktopNavBottomItem({
+    Key? key,
+    required String itemName,
+    Widget? itemImage,
+  }) : super(key: key, itemName: itemName, itemImage: itemImage);
+}

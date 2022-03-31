@@ -53,7 +53,7 @@ class _HomeState extends State<Home> {
             selectedIndex: _index,
             itemSelectedBackgroundColor: const Color(0xFF000000),
             items: [
-              SymDesktopNavItem(
+              SymDesktopNavTopItem(
                 itemName: 'Home',
                 withSeparator: true,
                 itemImage: _index == 0
@@ -68,7 +68,7 @@ class _HomeState extends State<Home> {
                         color: Color(0xFF9E9E9E),
                       ),
               ),
-              SymDesktopNavItem(
+              SymDesktopNavTopItem(
                 itemName: 'Mingle',
                 itemImage: _index == 1
                     ? const Icon(
@@ -82,16 +82,15 @@ class _HomeState extends State<Home> {
                         color: Color(0xFF9E9E9E),
                       ),
               ),
-              const SymDesktopNavItem(
+              const SymDesktopNavTopItem(
                 itemName: 'Discuss',
                 withSeparator: true,
               ),
-              const SymDesktopNavItem(
+              const SymDesktopNavTopItem(
                 itemName: 'Test',
               ),
-              SymDesktopNavItem(
+              SymDesktopNavBottomItem(
                 itemName: 'Notifikasi',
-                withSeparator: true,
                 itemImage: _index == 4
                     ? const Icon(
                         Icons.notification_add,
@@ -103,11 +102,9 @@ class _HomeState extends State<Home> {
                         size: 25,
                         color: Color(0xFF9E9E9E),
                       ),
-                classify: Classify.bottom,
               ),
-              SymDesktopNavItem(
+              SymDesktopNavBottomItem(
                 itemName: 'Notifikasi',
-                withSeparator: true,
                 itemImage: _index == 5
                     ? const Icon(
                         Icons.notification_add,
@@ -119,9 +116,8 @@ class _HomeState extends State<Home> {
                         size: 25,
                         color: Color(0xFF9E9E9E),
                       ),
-                classify: Classify.bottom,
               ),
-              SymDesktopNavItem(
+              SymDesktopNavBottomItem(
                 itemName: 'Settings',
                 itemImage: _index == 6
                     ? const Icon(
@@ -134,7 +130,6 @@ class _HomeState extends State<Home> {
                         size: 25,
                         color: Color(0xFF9E9E9E),
                       ),
-                classify: Classify.bottom,
               ),
             ],
             onItemSelected: (index) {

@@ -36,10 +36,10 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
   @override
   Widget build(BuildContext context) {
     List<List<SymDesktopNavItem>> categorizedItems = [];
-    categorizedItems.add(List.of(
-        widget.items.where((element) => element.classify == Classify.top)));
-    categorizedItems.add(List.of(
-        widget.items.where((element) => element.classify == Classify.bottom)));
+    categorizedItems
+        .add(List.of(widget.items.whereType<SymDesktopNavTopItem>()));
+    categorizedItems
+        .add(List.of(widget.items.whereType<SymDesktopNavBottomItem>()));
 
     return Material(
       color: widget.backgroundColor ?? const Color(0xFFF5F5F5),
@@ -112,8 +112,8 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
       children: [
         Padding(
           padding: EdgeInsets.only(
-            top: (value.classify == Classify.top && valueIndex == 0) ? 16 : 8,
-            bottom: (value.classify == Classify.bottom &&
+            top: (value is SymDesktopNavTopItem && valueIndex == 0) ? 16 : 8,
+            bottom: (value is SymDesktopNavBottomItem &&
                     valueIndex == groupValuesLength - 1)
                 ? 16
                 : 8,
@@ -133,7 +133,7 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
             ),
           ),
         ),
-        value.withSeparator && value.classify == Classify.top
+        value is SymDesktopNavTopItem && value.withSeparator
             ? _separator()
             : Ink()
       ],
@@ -160,8 +160,8 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
     double extra = 0;
     List<int> separatorIndexes = [];
     for (var i = 0; i < widget.items.length; i++) {
-      if (widget.items[i].withSeparator &&
-          widget.items[i].classify == Classify.top) {
+      if (widget.items[i] is SymDesktopNavTopItem &&
+          (widget.items[i] as SymDesktopNavTopItem).withSeparator) {
         separatorIndexes.add(i);
       }
     }
@@ -177,7 +177,7 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
     }
 
     double offsetY = (16.0 + 44) * widget.selectedIndex + extra;
-    if (widget.items[widget.selectedIndex].classify == Classify.bottom) {
+    if (widget.items[widget.selectedIndex] is SymDesktopNavBottomItem) {
       offsetY = ((MediaQuery.of(context).size.height - 16.0) -
           (44 + 16.0) * (widget.items.length - widget.selectedIndex));
     }
