@@ -4,68 +4,84 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-abstract class SymDesktopNavItem extends StatelessWidget {
+// Navigation Item
+abstract class SymNavItem extends StatelessWidget {
   final String itemName;
   final Widget? itemImage;
-  const SymDesktopNavItem({
+  final double? width;
+  final double? height;
+  final TextStyle? textStyle;
+  const SymNavItem({
     Key? key,
     required this.itemName,
     this.itemImage,
+    this.width,
+    this.height,
+    this.textStyle,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Tooltip(
       message: itemName,
+      textStyle: textStyle,
       waitDuration: const Duration(seconds: 1),
-      child: Ink(
-        height: 32,
-        width: 32,
-        child: _getView(),
-      ),
+      child: _getView(),
     );
   }
 
   Widget _getView() {
-    Widget w = Ink(
-      height: 32,
-      width: 32,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4),
-        color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
-            .withOpacity(1.0),
-      ),
-      child: Center(
-        child: Text(
-          itemName.substring(0, 1).toUpperCase(),
-        ),
+    Widget child = Center(
+      child: Text(
+        itemName.substring(0, 1).toUpperCase(),
+        style: textStyle,
       ),
     );
+    BoxDecoration? decoration;
     if (itemImage != null) {
-      w = itemImage!;
+      child = itemImage!;
+      decoration = null;
+    } else {
+      decoration = BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
+            .withOpacity(1.0),
+      );
     }
-    return w;
+    return Ink(
+      height: height ?? 25,
+      width: width ?? 25,
+      decoration: decoration,
+      child: child,
+    );
   }
 }
 
-class SymDesktopNavTopItem extends SymDesktopNavItem {
+// Navigation Item Wrapperr for desktop layout only
+class SymDesktopNavTopItem extends SymNavItem {
   final bool withSeparator;
   const SymDesktopNavTopItem({
     Key? key,
-    required String itemName,
-    Widget? itemImage,
+    required final String itemName,
+    final Widget? itemImage,
+    final double? width,
+    final double? height,
     this.withSeparator = false,
   }) : super(key: key, itemName: itemName, itemImage: itemImage);
 }
 
-class SymDesktopNavBottomItem extends SymDesktopNavItem {
+// Navigation Item Wrapperr for desktop layout only
+class SymDesktopNavBottomItem extends SymNavItem {
   const SymDesktopNavBottomItem({
     Key? key,
-    required String itemName,
+    required final String itemName,
+    final double? width,
+    final double? height,
     Widget? itemImage,
   }) : super(key: key, itemName: itemName, itemImage: itemImage);
 }
 
+// Navigation Selection
 class SymDesktopNavSelection extends StatefulWidget {
   final double height, width, offsetY;
   final Color color;
@@ -153,8 +169,9 @@ class _SymDesktopNavSelectionState extends State<SymDesktopNavSelection>
   }
 }
 
+// Navigation desktop. Only for desktop layout
 class SymDesktopNav extends StatefulWidget {
-  final List<SymDesktopNavItem> items;
+  final List<SymNavItem> items;
   final int selectedIndex;
   final ValueChanged<int> onItemSelected;
   final Color? backgroundColor;
@@ -163,19 +180,30 @@ class SymDesktopNav extends StatefulWidget {
   final TextStyle? textStyle;
   final Curve curve;
   final Duration duration;
+  final double? width;
+  final double? itemWidth;
+  final double? itemHeight;
+  final double? itemSelectionRadius;
+  final double separatorHeight;
 
-  const SymDesktopNav(
-      {Key? key,
-      required this.items,
-      required this.selectedIndex,
-      required this.onItemSelected,
-      this.backgroundColor,
-      this.textStyle,
-      this.itemSelectedBackgroundColor,
-      this.lineColor,
-      this.curve = Curves.fastLinearToSlowEaseIn,
-      this.duration = const Duration(milliseconds: 500)})
-      : super(key: key);
+  const SymDesktopNav({
+    Key? key,
+    required this.items,
+    required this.selectedIndex,
+    required this.onItemSelected,
+    this.backgroundColor,
+    this.textStyle,
+    this.itemSelectedBackgroundColor,
+    this.lineColor,
+    this.curve = Curves.fastLinearToSlowEaseIn,
+    this.duration = const Duration(milliseconds: 500),
+    this.width,
+    this.itemWidth,
+    this.itemHeight,
+    this.itemSelectionRadius,
+    this.separatorHeight = 1.5,
+  })  : assert(separatorHeight < 8),
+        super(key: key);
 
   @override
   _SymDesktopNavState createState() => _SymDesktopNavState();
@@ -184,7 +212,7 @@ class SymDesktopNav extends StatefulWidget {
 class _SymDesktopNavState extends State<SymDesktopNav> {
   @override
   Widget build(BuildContext context) {
-    List<List<SymDesktopNavItem>> categorizedItems = [];
+    List<List<SymNavItem>> categorizedItems = [];
     categorizedItems
         .add(List.of(widget.items.whereType<SymDesktopNavTopItem>()));
     categorizedItems
@@ -194,6 +222,7 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
       color: widget.backgroundColor ?? const Color(0xFFF5F5F5),
       textStyle: widget.textStyle,
       child: Container(
+        width: widget.width ?? 56,
         decoration: BoxDecoration(
           border: Border(
             right: BorderSide(
@@ -205,22 +234,17 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
         ),
         child: Stack(
           children: [
-            Container(
-              padding: const EdgeInsets.only(
-                top: 16,
-                bottom: 16,
-              ),
-              child: SymDesktopNavSelection(
-                height: 44,
-                width: 44,
-                offsetY: _getYOffset(),
-                color: widget.itemSelectedBackgroundColor ??
-                    const Color(0xFF212121),
-                duration: widget.duration,
-                curve: widget.curve,
-              ),
+            SymDesktopNavSelection(
+              height: widget.itemHeight ?? 40,
+              width: widget.itemHeight ?? 40,
+              offsetY: _getYOffset(),
+              color:
+                  widget.itemSelectedBackgroundColor ?? const Color(0xFF212121),
+              duration: widget.duration,
+              curve: widget.curve,
             ),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: categorizedItems
                   .asMap()
@@ -255,30 +279,30 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
     );
   }
 
-  Widget _item(int groupIndex, int valueIndex, int groupValuesLength,
-      SymDesktopNavItem value) {
+  Widget _item(
+      int groupIndex, int valueIndex, int groupValuesLength, SymNavItem value) {
     return Column(
       children: [
-        Padding(
-          padding: EdgeInsets.only(
-            top: (value is SymDesktopNavTopItem && valueIndex == 0) ? 16 : 8,
-            bottom: (value is SymDesktopNavBottomItem &&
-                    valueIndex == groupValuesLength - 1)
-                ? 16
-                : 8,
-            left: 8,
-            right: 8,
-          ),
-          child: InkWell(
-            onTap: () {
-              widget.onItemSelected.call(widget.items.indexOf(value));
-            },
-            borderRadius: BorderRadius.circular(8),
-            hoverColor: widget.itemSelectedBackgroundColor?.withOpacity(0.5) ??
-                const Color(0xFF000000).withOpacity(0.1),
+        Ink(
+          height: widget.width ?? 56,
+          width: widget.width ?? 56,
+          child: Center(
             child: Ink(
-              padding: const EdgeInsets.all(6),
-              child: value,
+              height: widget.itemHeight ?? 40,
+              width: widget.itemHeight ?? 40,
+              child: InkWell(
+                onTap: () {
+                  widget.onItemSelected.call(widget.items.indexOf(value));
+                },
+                borderRadius:
+                    BorderRadius.circular(widget.itemSelectionRadius ?? 8),
+                hoverColor:
+                    widget.itemSelectedBackgroundColor?.withOpacity(0.5) ??
+                        const Color(0xFF000000).withOpacity(0.1),
+                child: Ink(
+                  child: value,
+                ),
+              ),
             ),
           ),
         ),
@@ -299,7 +323,7 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
             borderRadius: BorderRadius.circular(4),
             color: widget.lineColor ?? const Color(0xFFE0E0E0),
           ),
-          height: 1.5,
+          height: widget.separatorHeight,
         ),
       ),
     );
@@ -325,11 +349,13 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
       }
     }
 
-    double offsetY = (16.0 + 44) * widget.selectedIndex + extra;
+    double offsetY = ((16.0 + 40) * widget.selectedIndex) + 8.0 + extra;
     if (widget.items[widget.selectedIndex] is SymDesktopNavBottomItem) {
-      offsetY = ((MediaQuery.of(context).size.height - 16.0) -
-          (44 + 16.0) * (widget.items.length - widget.selectedIndex));
+      offsetY = ((MediaQuery.of(context).size.height) -
+              (40 + 16.0) * (widget.items.length - widget.selectedIndex)) +
+          8.0;
     }
+
     return offsetY;
   }
 }
