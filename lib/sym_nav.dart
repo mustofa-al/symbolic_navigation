@@ -601,11 +601,12 @@ class _SymMobileNavState extends State<SymMobileNav> {
 
   double _getXOffset() {
     double extra = 0;
-    if (widget.selectedIndex != 0) {
-      if ((widget.items[widget.selectedIndex - 1] as SymMobileNavItem)
-          .withSeparator) {
-        extra = 4.0;
-      }
+
+    if ((widget.items[widget.selectedIndex] as SymMobileNavItem)
+        .withSeparator) {
+      extra = 0.0;
+    } else {
+      extra = 4.0;
     }
 
     double offsetX = ((MediaQuery.of(context).size.width /
