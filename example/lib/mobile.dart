@@ -19,10 +19,13 @@ class _MobileState extends State<Mobile> {
       ),
       bottomNavigationBar: SymMobileNav(
         items: [
+          const SymMobileNavItem(
+            itemName: 'Profile',
+          ),
           SymMobileNavItem(
             itemName: 'Home',
             withSeparator: true,
-            itemImage: _index == 0
+            itemImage: _index == 1
                 ? const Icon(
                     Icons.alarm_add,
                     size: 25,
@@ -36,7 +39,7 @@ class _MobileState extends State<Mobile> {
           ),
           SymMobileNavItem(
             itemName: 'Mingle',
-            itemImage: _index == 1
+            itemImage: _index == 2
                 ? const Icon(
                     Icons.add_a_photo,
                     size: 25,

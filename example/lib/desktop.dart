@@ -22,10 +22,13 @@ class _DesktopState extends State<Desktop> {
             selectedIndex: _index,
             itemSelectedBackgroundColor: const Color(0xFF000000),
             items: [
+              const SymDesktopNavTopItem(
+                itemName: 'Profile',
+              ),
               SymDesktopNavTopItem(
                 itemName: 'Home',
                 withSeparator: true,
-                itemImage: _index == 0
+                itemImage: _index == 1
                     ? const Icon(
                         Icons.alarm_add,
                         size: 25,
@@ -39,7 +42,7 @@ class _DesktopState extends State<Desktop> {
               ),
               SymDesktopNavTopItem(
                 itemName: 'Mingle',
-                itemImage: _index == 1
+                itemImage: _index == 2
                     ? const Icon(
                         Icons.add_a_photo,
                         size: 25,
@@ -60,20 +63,6 @@ class _DesktopState extends State<Desktop> {
               ),
               SymDesktopNavBottomItem(
                 itemName: 'Notifikasi',
-                itemImage: _index == 4
-                    ? const Icon(
-                        Icons.notification_add,
-                        size: 25,
-                        color: Color(0xFF9E9E9E),
-                      )
-                    : const Icon(
-                        Icons.notifications,
-                        size: 25,
-                        color: Color(0xFF9E9E9E),
-                      ),
-              ),
-              SymDesktopNavBottomItem(
-                itemName: 'Notifikasi',
                 itemImage: _index == 5
                     ? const Icon(
                         Icons.notification_add,
@@ -87,8 +76,22 @@ class _DesktopState extends State<Desktop> {
                       ),
               ),
               SymDesktopNavBottomItem(
-                itemName: 'Settings',
+                itemName: 'Notifikasi',
                 itemImage: _index == 6
+                    ? const Icon(
+                        Icons.notification_add,
+                        size: 25,
+                        color: Color(0xFF9E9E9E),
+                      )
+                    : const Icon(
+                        Icons.notifications,
+                        size: 25,
+                        color: Color(0xFF9E9E9E),
+                      ),
+              ),
+              SymDesktopNavBottomItem(
+                itemName: 'Settings',
+                itemImage: _index == 7
                     ? const Icon(
                         Icons.settings_accessibility,
                         size: 25,
