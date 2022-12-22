@@ -22,12 +22,7 @@ abstract class SymNavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Tooltip(
-      message: itemName,
-      textStyle: textStyle,
-      waitDuration: const Duration(seconds: 1),
-      child: _getView(),
-    );
+    return _getView();
   }
 
   Widget _getView() {
