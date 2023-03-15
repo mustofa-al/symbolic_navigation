@@ -272,6 +272,7 @@ class SymDesktopNav extends StatefulWidget {
   final ValueChanged<int> onItemSelected;
   final Color? backgroundColor;
   final Color? itemSelectedBackgroundColor;
+  final Color? itemHoverColor;
   final Color? lineColor;
   final TextStyle? textStyle;
   final Curve curve;
@@ -298,6 +299,7 @@ class SymDesktopNav extends StatefulWidget {
     this.itemHeight,
     this.itemSelectionRadius,
     this.separatorWeight = 1.5,
+    this.itemHoverColor,
   })  : assert(separatorWeight < 8),
         super(key: key);
 
@@ -392,9 +394,9 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
                 },
                 borderRadius:
                     BorderRadius.circular(widget.itemSelectionRadius ?? 8),
-                hoverColor:
+                hoverColor: widget.itemHoverColor ??
                     widget.itemSelectedBackgroundColor?.withOpacity(0.5) ??
-                        const Color(0xFF000000).withOpacity(0.1),
+                    const Color(0xFF000000).withOpacity(0.1),
                 child: Ink(
                   child: value,
                 ),
@@ -462,6 +464,7 @@ class SymMobileNav extends StatefulWidget {
   final ValueChanged<int> onItemSelected;
   final Color? backgroundColor;
   final Color? itemSelectedBackgroundColor;
+  final Color? itemHoverColor;
   final Color? lineColor;
   final TextStyle? textStyle;
   final Curve curve;
@@ -487,6 +490,7 @@ class SymMobileNav extends StatefulWidget {
     this.itemHeight,
     this.itemSelectionRadius,
     this.separatorWeight = 1,
+    this.itemHoverColor,
   })  : assert(separatorWeight < 8),
         super(key: key);
 
@@ -562,9 +566,9 @@ class _SymMobileNavState extends State<SymMobileNav> {
                   },
                   borderRadius:
                       BorderRadius.circular(widget.itemSelectionRadius ?? 8),
-                  hoverColor:
+                  hoverColor: widget.itemHoverColor ??
                       widget.itemSelectedBackgroundColor?.withOpacity(0.5) ??
-                          const Color(0xFF000000).withOpacity(0.1),
+                      const Color(0xFF000000).withOpacity(0.1),
                   child: Ink(
                     child: value,
                   ),
