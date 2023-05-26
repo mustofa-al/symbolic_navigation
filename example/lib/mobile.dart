@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sym_nav/sym_nav.dart';
 
 class Mobile extends StatefulWidget {
-  Mobile({Key? key}) : super(key: key);
+  const Mobile({Key? key}) : super(key: key);
 
   @override
   State<Mobile> createState() => _MobileState();

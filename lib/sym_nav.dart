@@ -406,7 +406,7 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
         ),
         value is SymDesktopNavTopItem && value.withSeparator
             ? _separator()
-            : Ink()
+            : const SizedBox()
       ],
     );
   }
@@ -577,7 +577,9 @@ class _SymMobileNavState extends State<SymMobileNav> {
             ),
           ),
         ),
-        value is SymMobileNavItem && value.withSeparator ? _separator() : Ink()
+        value is SymMobileNavItem && value.withSeparator
+            ? _separator()
+            : const SizedBox()
       ],
     );
   }

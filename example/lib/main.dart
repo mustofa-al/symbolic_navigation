@@ -59,7 +59,7 @@ class _HomeState extends State<Home> {
             InkWell(
               onTap: () {
                 Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => Mobile()));
+                    .push(MaterialPageRoute(builder: (context) => const Mobile()));
               },
               child: const Text('Mobile'),
             ),
