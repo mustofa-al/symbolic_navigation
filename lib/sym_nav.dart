@@ -449,14 +449,17 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
       }
     }
 
-    double offsetY = ((16.0 + 40) * widget.selectedIndex) + 8.0 + extra;
+    double offsetY = ((16.0 + 40) * widget.selectedIndex) +
+        8.0 +
+        extra -
+        MediaQuery.of(context).padding.top;
     if (widget.items[widget.selectedIndex] is SymDesktopNavBottomItem) {
       offsetY = ((MediaQuery.of(context).size.height) -
               (40 + 16.0) * (widget.items.length - widget.selectedIndex)) +
           8.0;
     }
 
-    return offsetY + MediaQuery.of(context).padding.top;
+    return offsetY;
   }
 }
 
