@@ -456,7 +456,7 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
           8.0;
     }
 
-    return offsetY;
+    return offsetY + MediaQuery.of(context).padding.top;
   }
 }
 
