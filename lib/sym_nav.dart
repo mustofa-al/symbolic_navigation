@@ -316,62 +316,64 @@ class _SymDesktopNavState extends State<SymDesktopNav> {
     categorizedItems
         .add(List.of(widget.items.whereType<SymDesktopNavBottomItem>()));
 
-    return Material(
-      color: widget.backgroundColor ?? const Color(0xFFF5F5F5),
-      textStyle: widget.textStyle,
-      child: Container(
-        width: widget.width ?? 56,
-        decoration: BoxDecoration(
-          border: Border(
-            right: BorderSide(
-              color: widget.lineColor ?? const Color(0xFFE0E0E0),
-              style: BorderStyle.solid,
-              width: 1,
+    return SafeArea(
+      child: Material(
+        color: widget.backgroundColor ?? const Color(0xFFF5F5F5),
+        textStyle: widget.textStyle,
+        child: Container(
+          width: widget.width ?? 56,
+          decoration: BoxDecoration(
+            border: Border(
+              right: BorderSide(
+                color: widget.lineColor ?? const Color(0xFFE0E0E0),
+                style: BorderStyle.solid,
+                width: 1,
+              ),
             ),
           ),
-        ),
-        child: Stack(
-          children: [
-            SymDesktopNavSelection(
-              height: widget.itemHeight ?? 40,
-              width: widget.itemHeight ?? 40,
-              offsetY: _getYOffset(),
-              color:
-                  widget.itemSelectedBackgroundColor ?? const Color(0xFF212121),
-              duration: widget.duration,
-              curve: widget.curve,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: categorizedItems
-                  .asMap()
-                  .map(
-                    (groupIndex, groupValue) => MapEntry(
-                      groupIndex,
-                      Column(
-                        children: groupValue
-                            .asMap()
-                            .map(
-                              (itemIndex, itemValue) => MapEntry(
-                                itemIndex,
-                                _item(
-                                  groupIndex,
+          child: Stack(
+            children: [
+              SymDesktopNavSelection(
+                height: widget.itemHeight ?? 40,
+                width: widget.itemHeight ?? 40,
+                offsetY: _getYOffset(),
+                color: widget.itemSelectedBackgroundColor ??
+                    const Color(0xFF212121),
+                duration: widget.duration,
+                curve: widget.curve,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: categorizedItems
+                    .asMap()
+                    .map(
+                      (groupIndex, groupValue) => MapEntry(
+                        groupIndex,
+                        Column(
+                          children: groupValue
+                              .asMap()
+                              .map(
+                                (itemIndex, itemValue) => MapEntry(
                                   itemIndex,
-                                  groupValue.length,
-                                  itemValue,
+                                  _item(
+                                    groupIndex,
+                                    itemIndex,
+                                    groupValue.length,
+                                    itemValue,
+                                  ),
                                 ),
-                              ),
-                            )
-                            .values
-                            .toList(),
+                              )
+                              .values
+                              .toList(),
+                        ),
                       ),
-                    ),
-                  )
-                  .values
-                  .toList(),
-            ),
-          ],
+                    )
+                    .values
+                    .toList(),
+              ),
+            ],
+          ),
         ),
       ),
     );
